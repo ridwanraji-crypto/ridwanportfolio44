@@ -3,11 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Place these in your <head> -->
+    <meta name="description" content="Ridwan Portfolio - Creative Web & Graphic Designer in Lagos, Nigeria. View my work, skills, and contact me for your next project.">
+    <meta property="og:title" content="Ridwan Portfolio | Web & Graphic Designer">
+    <meta property="og:description" content="Creative web and graphic design services for businesses and brands.">
+    <meta property="og:image" content="URL_TO_YOUR_IMAGE">
     <title>Design Portfolio | Web & Graphics Designer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     
 
     <style>
+
+        /* Whatsapp Floating Button */
+        .whatsapp-float {
+
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+        }
+
+        /* Typping Annimation Text */
+        #typing-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            white-space: nowrap;
+            border-right: 2px solid var(--accent);
+            animation: blink-caret 0.7s step-end infinite;
+        }
+        @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: var(--accent); }
+        }
+        
         /* Base Styles */
         /* Add to your CSS */
         body.dark-mode {
@@ -127,6 +173,14 @@
             background: var(--primary);
             color: white;
         }
+
+        .btn, .btn-outline {
+            transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+        }
+        .btn:hover, .btn-outline:hover {
+            transform: scale(1.07) translateY(-3px) rotate(-1deg);
+            box-shadow: 0 8px 24px rgba(67,97,238,0.13);
+        }
         
         /* Header & Navigation */
         header {
@@ -220,7 +274,7 @@
         }
         
         .hero-image img {
-            max-width: 100%;
+            max-width: 85%;
             border-radius: 20px;
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
         }
@@ -302,8 +356,63 @@
         
         .skill-progress {
             height: 100%;
-            background: var(--primary);
             border-radius: 5px;
+            transition: width 1.5s, background 0.8s;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        /* Advanced Stats Section Styles */
+        .stats-section {
+            padding: 70px 0 40px 0;
+        }
+        .stats-section .section-title h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .stats-section .section-title p {
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+        .stats-advanced {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            cursor: pointer;
+            transition: transform 0.18s, box-shadow 0.18s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s;
+        }
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05) rotate(-1deg);
+            box-shadow: 0 16px 40px rgba(67,97,238,0.18);
+        }
+        .stat-icon-bounce {
+            animation: bounce 1.5s infinite;
+        }
+        .stat-icon-bounce:hover, .contact-icon:hover {
+            animation: spin 0.7s;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1);}
+            50% { transform: scale(1.15);}
+            100% { transform: scale(1);}
+        }       
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0);}
+            50% { transform: translateY(-10px);}
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes pop {
+            0% { transform: scale(1);}
+            60% { transform: scale(1.25);}
+            100% { transform: scale(1);}
         }
         
         /* Portfolio Section */
@@ -410,12 +519,29 @@
             transition: transform 0.2s;
         }
         .faq-answer {
-            display: none;
             padding: 0 20px 20px 20px;
             color: #333;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.4s;
+            padding: 0 20px;
+            display: block;
         }
         .faq-item.active .faq-answer {
             display: block;
+            max-height: 200px;
+            padding: 0 20px 20px 20px;
+        }
+        .faq-item.active .faq-question {
+            background: #e9ecef;
+            color: var(--primary);
+        }
+        .faq-question i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        .faq-question:focus {
+            outline: 2px solid var(--primary);
         }
         .faq-item.active .faq-plus {
             transform: rotate(45deg); /* Turns + into × when open */
@@ -472,6 +598,28 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
+
+        .contact-social {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .contact-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 1.3em;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .contact-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px) scale(1.08);
+        }
         
         .form-group {
             margin-bottom: 20px;
@@ -502,6 +650,75 @@
             min-height: 150px;
             resize: vertical;
         }
+
+        /* Testimonials Section */
+.testimonials {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+.testimonials .section-title h2 {
+    color: var(--secondary);
+}
+.testimonials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.testimonial-item {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(67,97,238,0.07);
+    padding: 30px;
+    max-width: 350px;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.testimonial-item:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(67,97,238,0.12);
+}
+.testimonial-item p {
+    font-style: italic;
+    color: #333;
+    margin-bottom: 20px;
+}
+.testimonial-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+.testimonial-item strong {
+    color: var(--secondary);
+    font-size: 1.05em;
+}
+.testimonial-item span {
+    color: #6c757d;
+    font-size: 0.95em;
+}
+.testimonial-item > div {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+
+
+/* Responsive for testimonials */
+@media (max-width: 900px) {
+    .testimonials-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .testimonial-item {
+        max-width: 100%;
+    }
+}
         
         /* Footer */
         footer {
@@ -608,6 +825,18 @@
                 font-size: 2.2rem;
             }
         }
+        /* Advanced Stats Section */
+        @media (max-width: 900px) {
+            .stats-advanced {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            .stat-card {
+                min-width: 220px;
+                width: 100%;
+            }
+        }
         
         @media (max-width: 768px) {
             .hamburger {
@@ -692,11 +921,15 @@
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header>
+    <header data-aos="fade-down" data-aos-delay="200">
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">RIDWAN<span>PORTFOLIO</span></a>
+
+                <!--Dark Mode Toogle-->
                 <button id="darkModeToggle" aria-label="Toggle dark mode" style="font-size:1.2em; margin-left:20px; cursor:pointer;">🌙</button>
+                
+                <!-- Navigation Links -->
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -712,10 +945,12 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
+                        <!-- Place this where you want the typing animation -->
+                        <span id="typing-text"></span>
                     <h1>Creative Web & Graphic <span>Designer</span></h1>
                     <p>I create beautiful, functional designs that help businesses stand out. With a passion for both web and graphic design, I bring ideas to life with creativity and technical expertise.</p>
                     <div class="hero-btns">
@@ -724,14 +959,14 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=500" alt="Designer at work">
+                    <img src="https://i.pinimg.com/736x/b4/07/3a/b4073ae822c46bc169e18a42f49bba08.jpg" alt="Designer at work">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about" data-aos="fade-up" data-aos-delay="200" >
         <div class="container">
             <div class="section-title">
                 <h2>About Me</h2>
@@ -739,7 +974,7 @@
             </div>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="IMG-20250102-WA0075.jpg" alt="Designer">
+                    <img src="https://i.pinimg.com/736x/69/2f/76/692f7637a954ea39c578c0b8a417868a.jpg" alt="Designer">
                 </div>
                 <div class="about-text">
                     <h3>Hello, I'm RAJI RIDWANULLAHI</h3>
@@ -754,7 +989,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <section id="skills" class="skills" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="section-title">
                 <h2>My Skills</h2>
@@ -884,17 +1119,104 @@
         </div>
     </section>
 
+    <!-- Tech Stack Section -->
+
+<div class="container" data-aos="fade-up" data-aos-delay="200">
+  <div class="section-title">
+    <h2>Tech Stack</h2>
+    <p>Languages, frameworks, and tools I use</p>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:60px;justify-content:center;">
+    <!-- Frontend Group -->
+    <div style="text-align:center;">
+      <h4 style="margin-bottom:15px;color:var(--secondary);">Frontend</h4>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" title="HTML5" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">HTML5</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" title="CSS3" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">CSS3</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" title="JavaScript" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">JavaScript</div>
+    </div>
+    <!-- Backend Group -->
+    <div style="text-align:center;">
+      <h4 style="margin-bottom:15px;color:var(--secondary);">Backend</h4>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" title="Node.js" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Node.js</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Python</div>
+    </div>
+    <!-- Graphics Design Group -->
+    <div style="text-align:center;">
+      <h4 style="margin-bottom:15px;color:var(--secondary);">Graphics Design</h4>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Adobe Photoshop" title="Adobe Photoshop" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Adobe Photoshop</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" alt="Adobe Illustrator" title="Adobe Illustrator" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Adobe Illustrator</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" title="Figma" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Canva</div>
+      <!-- Add more graphics tools as needed -->
+    </div>
+    <!-- Tools Group -->
+    <div style="text-align:center;">
+      <h4 style="margin-bottom:15px;color:var(--secondary);">Other Tools</h4>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" title="Git" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Git</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" title="Figma" style="height:48px;margin:0 8px;">
+      <div style="font-size:0.95em;margin-bottom:10px;">Figma</div>
+      <!-- Add more tools as needed -->
+    </div>
+  </div>
+</div>
+
+    <!-- Replace your current stats section with this advanced, lively version -->
+
+<section id="stats" class="stats-section" data-aos="fade-up" data-aos-delay="200">
+  <div class="container">
+    <div class="section-title">
+      <h2>My Impact in Numbers</h2>
+      <p>Here’s a quick look at my achievements and experience so far</p>
+    </div>
+    <div class="stats-advanced" style="display:flex;gap:40px;justify-content:center;flex-wrap:wrap;">
+      <div class="stat-card" style="background:linear-gradient(135deg,#4361ee 60%,#f72585 100%);color:#fff;padding:38px 32px 28px 32px;border-radius:20px;box-shadow:0 8px 32px rgba(67,97,238,0.13);min-width:200px;position:relative;overflow:hidden;text-align:center;transition:transform 0.2s;">
+        <div class="stat-icon-bounce" style="margin-bottom:12px;">
+          <i class="fas fa-briefcase" style="font-size:2.5rem;color:#fff;opacity:0.9;"></i>
+        </div>
+        <div id="projectsCount" style="font-size:3rem;font-weight:bold;letter-spacing:1px;">0</div>
+        <div style="font-size:1.15rem;font-weight:600;margin-top:7px;">Projects</div>
+        <div style="height:4px;width:40px;background:#fff;opacity:0.2;border-radius:2px;margin:20px auto 0;"></div>
+      </div>
+      <div class="stat-card" style="background:linear-gradient(135deg,#3a0ca3 60%,#4361ee 100%);color:#fff;padding:38px 32px 28px 32px;border-radius:20px;box-shadow:0 8px 32px rgba(67,97,238,0.13);min-width:200px;position:relative;overflow:hidden;text-align:center;transition:transform 0.2s;">
+        <div class="stat-icon-bounce" style="margin-bottom:12px;">
+          <i class="fas fa-users" style="font-size:2.5rem;color:#fff;opacity:0.9;"></i>
+        </div>
+        <div id="clientsCount" style="font-size:3rem;font-weight:bold;letter-spacing:1px;">0</div>
+        <div style="font-size:1.15rem;font-weight:600;margin-top:7px;">Clients</div>
+        <div style="height:4px;width:40px;background:#fff;opacity:0.2;border-radius:2px;margin:20px auto 0;"></div>
+      </div>
+      <div class="stat-card" style="background:linear-gradient(135deg,#f72585 60%,#3a0ca3 100%);color:#fff;padding:38px 32px 28px 32px;border-radius:20px;box-shadow:0 8px 32px rgba(67,97,238,0.13);min-width:200px;position:relative;overflow:hidden;text-align:center;transition:transform 0.2s;">
+        <div class="stat-icon-bounce" style="margin-bottom:12px;">
+          <i class="fas fa-award" style="font-size:2.5rem;color:#fff;opacity:0.9;"></i>
+        </div>
+        <div id="yearsCount" style="font-size:3rem;font-weight:bold;letter-spacing:1px;">0</div>
+        <div style="font-size:1.15rem;font-weight:600;margin-top:7px;">Years Experience</div>
+        <div style="height:4px;width:40px;background:#fff;opacity:0.2;border-radius:2px;margin:20px auto 0;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="section-title">
                 <h2>My Portfolio</h2>
                 <p>Explore my recent design projects</p>
             </div>
             
+
             <div class="portfolio-grid">
                 <div class="portfolio-item" data-category="web">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=500" alt="E-commerce Website">
+                    <img src="https://i.pinimg.com/736x/bc/20/18/bc2018c35779f2d73847d8e5d14a8350.jpg" alt="E-commerce Website">
                     <div class="portfolio-overlay">
                         <h3>E-commerce Website</h3>
                         <p>Modern online store with intuitive user interface</p>
@@ -908,7 +1230,7 @@
                     </div>
                 </div>
                 <div class="portfolio-item" data-category="branding">
-                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=500" alt="Restaurant Branding">
+                    <img src="https://i.pinimg.com/736x/53/0d/19/530d192bcc98fab1594a08888acf7acf.jpg" alt="Restaurant Branding">
                     <div class="portfolio-overlay">
                         <h3>Restaurant Branding</h3>
                         <p>Full branding package for a gourmet restaurant</p>
@@ -929,7 +1251,7 @@
                     </div>
                 </div>
                 <div class="portfolio-item" data-category="branding">
-                    <img src="https://images.unsplash.com/photo-1610441913198-faaa162ce96e?q=80&w=697&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Coffee Brand">
+                    <img src="https://i.pinimg.com/736x/24/27/26/24272633c9b155ecc820f6c9450b4ef4.jpg" alt="Coffee Brand">
                     <div class="portfolio-overlay">
                         <h3>Coffee Brand</h3>
                         <p>Packaging and branding for premium coffee line</p>
@@ -939,8 +1261,42 @@
         </div>
     </section>
 
+    <!-- Blog-->
+
+<section id="blog" class="blog" data-aos="fade-up" data-aos-delay="200">
+    <div class="container">
+        <div class="section-title">
+            <h2>Blog & Insights</h2>
+            <p>Read my latest articles on programming, design, and my creative journey</p>
+        </div>
+        <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <!-- Example Blog Post 1 -->
+            <div class="blog-card" style="background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(67,97,238,0.07); padding:25px;">
+                <img src="https://i.pinimg.com/736x/3a/2a/7c/3a2a7c7db043bd0d0e0cc51256dc3dc6.jpg" alt="Dev.to Article" style="width:100%; border-radius:10px; margin-bottom:15px;">
+                <h3 style="color:var(--secondary); margin-bottom:10px;">How I Built My Portfolio Website with HTML, CSS & JS</h3>
+                <p style="color:var(--gray); margin-bottom:15px;">A step-by-step guide to building a modern, responsive portfolio from scratch.</p>
+                <a href="dev_learn.html" class="btn btn-outline blog-read-more" style="font-size:0.95em;">Read More</a>
+            </div>
+            <!-- Example Blog Post 2 -->
+            <div class="blog-card" style="background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(67,97,238,0.07); padding:25px;">
+                <img src="https://i.pinimg.com/736x/b4/07/3a/b4073ae822c46bc169e18a42f49bba08.jpg" alt="Medium Article" style="width:100%; border-radius:10px; margin-bottom:15px; height: 320px;">
+                <h3 style="color:var(--secondary); margin-bottom:10px;">Lessons Learned from My First Freelance Project</h3>
+                <p style="color:var(--gray); margin-bottom:15px;">What I wish I knew before starting as a freelance designer and developer.</p>
+                <a href="medium_learn.html" class="btn btn-outline blog-read-more" style="font-size:0.95em;">Read More</a>
+            </div>
+            <!-- Example Blog Post 3 -->
+            <div class="blog-card" style="background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(67,97,238,0.07); padding:25px;">
+                <img src="https://i.pinimg.com/736x/ee/c5/af/eec5afb80afe237a6cf0efaa49bd360a.jpg" alt="Hashnode Article" style="width:100%; border-radius:10px; margin-bottom:15px;">
+                <h3 style="color:var(--secondary); margin-bottom:10px;">My Favorite UI/UX Design Tools in 2025</h3>
+                <p style="color:var(--gray); margin-bottom:15px;">A rundown of the best tools I use for creating beautiful and functional designs.</p>
+                <a href="hash_learn.html" class="btn btn-outline blog-read-more" style="font-size:0.95em;">Read More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
     <!-- FAQ-->
-   <section id="faq" class="faq">
+   <section id="faq" class="faq" data-aos="fade-up" data-aos-delay="200">
     <div class="container">
         <div class="section-title">
             <h2>Frequently Asked Questions</h2>
@@ -948,8 +1304,9 @@
         </div>
         <div class="faq-list">
             <div class="faq-item">
-                <button class="faq-question">
+                <button class="faq-question" tabindex="0">
                     <span class="faq-plus">+</span>
+                    <i class="fas fa-question-circle"></i>
                     What services do you offer?
                 </button>
                 <div class="faq-answer">
@@ -957,8 +1314,9 @@
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
+                <button class="faq-question" tabindex="0">
                     <span class="faq-plus">+</span>
+                    <i class="fas fa-question-circle"></i>
                     How long does a typical project take?
                 </button>
                 <div class="faq-answer">
@@ -966,8 +1324,9 @@
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
+                <button class="faq-question" tabindex="0">
                     <span class="faq-plus">+</span>
+                    <i class="fas fa-question-circle"></i>
                     Can you work with clients remotely?
                 </button>
                 <div class="faq-answer">
@@ -975,8 +1334,29 @@
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">
+                <button class="faq-question" tabindex="0">
                     <span class="faq-plus">+</span>
+                    <i class="fas fa-credit-card"></i>
+                    What payment methods do you accept?
+                </button>
+                <div class="faq-answer">
+                    <p>I accept bank transfers, PayPal, and other secure payment methods. Details will be provided during project onboarding.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" tabindex="0">
+                    <span class="faq-plus">+</span>
+                    <i class="fas fa-sync-alt"></i>
+                     How many revisions are included?
+                </button>
+                <div class="faq-answer">
+                    <p>Most projects include up to 2 rounds of revisions. Additional revisions can be discussed if needed.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" tabindex="0">
+                    <span class="faq-plus">+</span>
+                    <i class="fas fa-question-circle"></i>
                     How do I get started?
                 </button>
                 <div class="faq-answer">
@@ -996,7 +1376,7 @@
                 <p>Let's work together on your next project</p>
             </div>
             <div class="contact-container">
-                <div class="contact-info">
+                <div class="contact-info" data-aos="fade-right">
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
@@ -1034,37 +1414,114 @@
                             <p>Weekend: By appointment</p>
                         </div>
                     </div>
+                    <div class="contact-social" style="margin-bottom: 25px;">
+                        <a href="https://wa.me/+2347034727964" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
                 </div>
-                <!-- ...existing code... -->
-<form id="contactForm">
-    <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="from_name" class="form-control" placeholder="Your Name" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="from_email" class="form-control" placeholder="your.email@example.com" required>
-    </div>
-    <div class="form-group">
-        <label for="subject">Subject</label>
-        <input type="text" id="subject" name="subject" class="form-control" placeholder="Project Inquiry" required>
-    </div>
-    <div class="form-group">
-        <label for="message">Your Message</label>
-        <textarea id="message" name="message" class="form-control" placeholder="How can I help you?" required></textarea>
-    </div>
-    <button type="submit" class="btn">Send Message</button>
+    <!-- ...existing code... -->
+    <form id="contactForm" data-aos="fade-left">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="from_name" class="form-control" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="from_email" class="form-control" placeholder="your.email@example.com" required>
+        </div>
+        <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Project Inquiry" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" class="form-control" placeholder="How can I help you?" required></textarea>
+        </div>
+            <button type="submit" class="btn">Send Message</button>
+        <div id="contactMessage" style="margin-top:15px; display:none; font-weight:600;"></div>
+        <div id="contactLoader" style="display:none; margin-top:10px; color:var(--primary); font-weight:600;">
+            <i class="fas fa-spinner fa-spin"></i> Sending...
+        </div>
 </form>
             </div>
         </div> <br>
 
+        <!-- Testimonials Section -->
+<section id="testimonials" class="testimonials" data-aos="200">
+    <div class="container">
+        <div class="section-title" data-aos="fade-down">
+            <h2>Testimonials</h2>
+            <p>What clients and colleagues say about my work</p>
+        </div>
+        <div class="testimonials-list" style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+            <div class="testimonial-item" data-aos="zoom-in" data-aos-delay="1000">
+                <p style="font-style: italic;">"Ridwan delivered our website ahead of schedule and exceeded our expectations in design and usability. Highly recommended!"</p>
+                <div class="testimonial-rating" style="margin-bottom:10px; color: gold;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div style="margin-top: 15px; display: flex; align-items: center;">
+                    <img src="https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fHdvcmt8ZW58MHx8MHx8fDA%3D" alt="Client" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px;">
+                    <div>
+                        <strong>Lolade</strong><br>
+                        <span style="color: #6c757d; font-size: 0.95em;">CEO, Hermaizing Hair</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item" data-aos="zoom-in" data-aos-delay="200">
+                <p style="font-style: italic;">"Creative, reliable, and always professional. Ridwan’s designs helped our brand stand out in a crowded market."</p>
+                <div class="testimonial-rating" style="margin-bottom:10px; color: gold;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div style="margin-top: 15px; display: flex; align-items: center;">
+                    <img src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fHdvcmt8ZW58MHx8MHx8fDA%3D" alt="Client" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px;">
+                    <div>
+                        <strong>Salramud</strong><br>
+                        <span style="color: #6c757d; font-size: 0.95em;">Salramud Global Logistics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item" data-aos="zoom-in" data-aos-delay="3000">
+                <p style="font-style: italic;">"Working with Ridwan was a pleasure. He communicates clearly and delivers top-notch results every time."</p>
+                <div class="testimonial-rating" style="margin-bottom:10px; color: gold;">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div style="margin-top: 15px; display: flex; align-items: center;">
+                    <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjN8fHdvcmt8ZW58MHx8MHx8fDA%3D" alt="Client" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px;">
+                    <div>
+                        <strong>Michael Lee</strong><br>
+                        <span style="color: #6c757d; font-size: 0.95em;">Freelance Developer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Google Map Embed -->
+    <section class="map" data-aos="fade-up" data-aos-delay="200">
+        <div class="container">
+            <div class="section-title">
+                <h2>Find Me Here</h2>
+                <p>Visit my location or get in touch online</p>
+            </div>
         <div class="embed-map-responsive"><div class="embed-map-container"><iframe class="embed-map-frame" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&height=400&hl=en&q=Ayobo%20Lagos%20State&t=&z=14&ie=UTF8&iwloc=B&output=embed"></iframe><a href="https://sprunkiretake.net" style="font-size:2px!important;color:gray!important;position:absolute;bottom:0;left:0;z-index:1;max-height:1px;overflow:hidden">sprunki retake</a></div><style>.embed-map-responsive{position:relative;text-align:right;width:100%;height:0;padding-bottom:66.66666666666666%;}.embed-map-container{overflow:hidden;background:none!important;width:100%;height:100%;position:absolute;top:0;left:0;}.embed-map-frame{width:100%!important;height:100%!important;position:absolute;top:0;left:0;}</style></div>
         
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
+        <div class="container" data-aos="fade-up" data-aos-delay="200">
             <div class="footer-content">
                 <div class="footer-col">
                     <h3>Ridwan Portfolio</h3>
@@ -1115,7 +1572,36 @@
     
     <!-- Place EmailJS SDK BEFORE your custom script -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
+
+    // Typing Animation
+document.addEventListener("DOMContentLoaded", function() {
+    const yourText = "Welcome To Ridwan Portfolio Website!";
+    const typingElement = document.getElementById("typing-text");
+    let charIndex = 0;
+    function typeText() {
+        if (charIndex <= yourText.length) {
+            typingElement.textContent = yourText.slice(0, charIndex);
+            charIndex++;
+            setTimeout(typeText, 120);
+        } else {
+            setTimeout(() => {
+                charIndex = 0;
+                typeText();
+            }, 1200); // Pause before restarting
+        }
+    }
+    typeText();
+});
+// ...Testimonial Page...
+    // Initialize AOS (Animate On Scroll)
+    AOS.init({
+        duration: 2000, // Animation duration in milliseconds
+        twice: true, // Whether animation should happen only once
+        easing: 'ease-in-out', // Easing function for animations
+    });
     // Dark mode toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
     darkModeToggle.addEventListener('click', function() {
@@ -1174,30 +1660,53 @@
 
     // FAQ toggle functionality
     document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', function() {
+    btn.addEventListener('click', function() {
         const item = this.parentElement;
         item.classList.toggle('active');
-        });
     });
+    btn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+});
 
     // EmailJS Initialization
     (function() {
         emailjs.init("b_98qcL-ftLjNHh5H"); // Your EmailJS public key
     })();
 
-    // EmailJS send function
-    function sendEmail(e) {
-        e.preventDefault();
-        emailjs.sendForm("service_67tdaz6", "template_qr5omia", this)
-        .then(function(response) {
-            alert("Message sent successfully!");
-            document.getElementById("contactForm").reset();
-        }, function(error) {
-            console.error(error);
-            alert("Failed to send message. Please check your EmailJS config and try again.");
+    // EmailJS send function with styled feedback
+// ...existing code...
+function sendEmail(e) {
+    e.preventDefault();
+    const messageDiv = document.getElementById("contactMessage");
+    const loader = document.getElementById("contactLoader");
+    messageDiv.style.display = "none";
+    loader.style.display = "block";
+    emailjs.sendForm("service_67tdaz6", "template_qr5omia", this)
+    .then(function(response) {
+        loader.style.display = "none";
+        messageDiv.innerHTML = "✅ Message sent successfully! <span style='font-size:2em;'>🎉</span>";
+        messageDiv.style.color = "#28a745";
+        messageDiv.style.display = "block";
+        document.getElementById("contactForm").reset();
+        // Confetti animation
+        confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.6 }
         });
-    }
-    document.getElementById("contactForm").addEventListener("submit", sendEmail);
+    }, function(error) {
+        loader.style.display = "none";
+        messageDiv.textContent = "❌ Failed to send message. Please try again later.";
+        messageDiv.style.color = "#dc3545";
+        messageDiv.style.display = "block";
+    });
+}
+    // Attach the sendEmail function to the form submit event
+document.getElementById("contactForm").addEventListener("submit", sendEmail);
 
     // Newsletter form validation and submission
     document.getElementById('newsletterForm').addEventListener('submit', function(e) {
@@ -1212,8 +1721,135 @@
     alert('Thank you for subscribing!');
     // The form will submit to Mailchimp in a new tab
 });
+
+    // ...existing code...
+// Real-time validation for contact form fields
+document.querySelectorAll('#contactForm input, #contactForm textarea').forEach(input => {
+    input.addEventListener('input', function() {
+        if (this.checkValidity()) {
+            this.style.borderColor = "#28a745"; // Green for valid
+        } else {
+            this.style.borderColor = "#dc3545"; // Red for invalid
+        }
+    });
+});
+// Place this inside your <script> tag, after your other scripts
+
+// Animated Skills Progress Bars
+function animateSkills() {
+    document.querySelectorAll('.skill-progress').forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        bar.style.transition = 'none';
+        // Trigger reflow to restart animation
+        void bar.offsetWidth;
+        setTimeout(() => {
+            bar.style.transition = 'width 1.5s';
+            bar.style.width = width;
+        }, 100);
+    });
+}
+
+// Run animation when skills section enters the viewport
+let skillsAnimated = false;
+window.addEventListener('scroll', function() {
+    const skillsSection = document.getElementById('skills');
+    if (!skillsAnimated && skillsSection && skillsSection.getBoundingClientRect().top < window.innerHeight - 100) {
+        animateSkills();
+        skillsAnimated = true;
+    }
+});
+// ...existing code...
+
+// Place this in your <script> tag after your other scripts
+
+function animateCount(id, end) {
+  let start = 0;
+  const el = document.getElementById(id);
+  const step = Math.ceil(end / 50);
+  function update() {
+    start += step;
+    if (start > end) start = end;
+    el.textContent = start;
+    if (start < end) requestAnimationFrame(update);
+  }
+  update();
+}
+
+// Animate when stats section enters viewport
+
+function animateCount(id, end) {
+  const el = document.getElementById(id);
+  let start = 0;
+  const duration = 2000; // total animation time in ms
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = Math.floor(progress * end);
+    el.textContent = value;
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = end; // Ensure the final value is exact
+      el.style.animation = "pop 0.4s";
+      setTimeout(() => {
+        el.style.animation = ""; // Reset animation after it completes
+      }, 2000); // Match the duration of the pop animation
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+let statsAnimated = false;
+window.addEventListener('scroll', function() {
+  const statsSection = document.querySelector('.stats-section');
+  if (!statsAnimated && statsSection && statsSection.getBoundingClientRect().top < window.innerHeight - 100) {
+    animateCount('projectsCount', 25); // Example: 25 projects
+    animateCount('clientsCount', 10);  // Example: 10 clients
+    animateCount('yearsCount', 5);     // Example: 5 years experience
+    statsAnimated = true;
+  }
+});
+
+// ...existing code...
+document.querySelectorAll('.blog-read-more').forEach((btn, idx) => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Show a button to read the full article (link to your real article)
+    const blogContents = [
+      `<h2>How I Built My Portfolio Website with HTML, CSS & JS</h2>
+       <p>A step-by-step guide to building a modern, responsive portfolio from scratch.</p>
+       <a href="dev_learn.html" class="btn btn-outline" style="margin-top:20px;display:inline-block;" target="_blank">Read Full Article</a>`,
+      `<h2>Lessons Learned from My First Freelance Project</h2>
+       <p>What I wish I knew before starting as a freelance designer and developer.</p>
+       <a href="medium_learn.html" class="btn btn-outline" style="margin-top:20px;display:inline-block;" target="_blank">Read Full Article</a>`,
+      `<h2>My Favorite UI/UX Design Tools in 2025</h2>
+       <p>A rundown of the best tools I use for creating beautiful and functional designs.</p>
+       <a href="hash_learn.html" class="btn btn-outline" style="margin-top:20px;display:inline-block;" target="_blank">Read Full Article</a>`
+    ];
+    document.getElementById('blogModalContent').innerHTML = blogContents[idx];
+    document.getElementById('blogModal').style.display = 'flex';
+  });
+});
+// ...existing code...
+// ...existing code...
+
 </script>
 <!-- ...existing code below... -->
+
+<a href="https://wa.me/2347034727964" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Blog Modal Popup -->
+<div id="blogModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:99999;">
+  <div style="background:#fff;padding:30px;border-radius:15px;max-width:600px;width:90%;position:relative;">
+    <button onclick="document.getElementById('blogModal').style.display='none'" style="position:absolute;top:10px;right:15px;font-size:1.5em;background:none;border:none;cursor:pointer;">&times;</button>
+    <div id="blogModalContent"></div>
+  </div>
+</div>
 
 </body>
 </html>

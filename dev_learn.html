@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How I Built My Portfolio Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+
+    .blog-post {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .blog-post h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #777;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .post-content h2 {
+      margin-top: 40px;
+      color: #1a73e8;
+    }
+
+    .post-content ul {
+      margin-left: 20px;
+      padding-left: 10px;
+    }
+
+    pre {
+      background: #272727;
+      color: #fff;
+      padding: 20px;
+      overflow-x: auto;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .link-box {
+      margin-top: 30px;
+    }
+
+    .link-box a {
+      display: inline-block;
+      background: #1a73e8;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px 10px 0 0;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .link-box a:hover {
+      background: #0f5bd7;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="blog-post">
+    <h1>How I Built My Portfolio Website with HTML, CSS & JS</h1>
+    <p class="subtitle">A step-by-step guide to building a modern, responsive portfolio from scratch</p>
+
+    <div class="post-content">
+      <h2>🧠 Step 1: Planning the Structure</h2>
+      <p>Before writing any code, I sketched out the key sections I wanted on my site:</p>
+      <ul>
+        <li>Hero section</li>
+        <li>About Me</li>
+        <li>Projects</li>
+        <li>Skills</li>
+        <li>Contact form</li>
+        <li>Blog or Testimonials</li>
+      </ul>
+
+      <h2>🧱 Step 2: Building the HTML Skeleton</h2>
+      <pre><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;nav&gt;
+      &lt;a href="#"&gt;Home&lt;/a&gt;
+      &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;section id="hero"&gt;
+    &lt;h1&gt;Hi, I'm Ridwan&lt;/h1&gt;
+    &lt;p&gt;Web Developer &amp; Designer&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section id="projects"&gt;
+    &lt;!-- Project cards go here --&gt;
+  &lt;/section&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2025 Ridwan Raji&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+</code></pre>
+
+      <h2>🎨 Step 3: Styling with CSS</h2>
+      <p>To keep things clean and responsive, I used Flexbox and media queries.</p>
+      <pre><code>body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+}
+
+#hero {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+}</code></pre>
+
+      <h2>🚀 Step 4: Adding JavaScript Interactions</h2>
+      <p>Simple JavaScript for smooth scrolling:</p>
+      <pre><code>document.querySelectorAll("nav a").forEach(link =&gt; {
+  link.addEventListener("click", e =&gt; {
+    e.preventDefault();
+    document.querySelector(link.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});</code></pre>
+
+      <h2>🧪 Step 5: Testing & Optimization</h2>
+      <ul>
+        <li>Tested on multiple screen sizes</li>
+        <li>Compressed images</li>
+        <li>Minified CSS and JS</li>
+        <li>Added meta and SEO tags</li>
+      </ul>
+
+      <h2>🌐 Step 6: Hosting the Site</h2>
+      <p>I hosted my site on GitHub Pages for free and also recommend Netlify or Vercel.</p>
+
+      <h2>💡 Final Thoughts</h2>
+      <p>Building from scratch improved my confidence and helped me understand core concepts better.</p>
+
+      <div class="link-box">
+        <a href="https://ridwanportfolio44.netlify.app/">🔗 View My Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
+
+
