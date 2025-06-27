@@ -11,10 +11,147 @@
     <title>Design Portfolio | Web & Graphics Designer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     
 
     <style>
+
+        /* Custom Cursor */
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            background: rgba(67, 97, 238, 0.18);
+            border: 2px solid #4361ee;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(1);
+            transition: background 0.2s, border 0.2s, transform 0.18s cubic-bezier(.4,2,.6,1);
+            mix-blend-mode: multiply;
+        }
+        #custom-cursor.grow {
+            transform: translate(-50%, -50%) scale(1.7);
+            background: rgba(67, 97, 238, 0.28);
+            border-width: 3px;
+        }
+        #custom-cursor.shrink {
+            transform: translate(-50%, -50%) scale(0.6);
+            background: rgba(67, 97, 238, 0.10);
+            border-width: 1px;
+        }
+
+        /* 1. Responsive Layout */
+@media (max-width: 992px) {
+  .hero-content, .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .blog-grid, .portfolio-grid, .skills-container {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  section {
+    padding: 60px 0;
+  }
+  .container {
+    padding: 0 8px;
+  }
+}
+
+/* 2. Navigation (Hamburger menu for mobile) */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  .nav-links.active {
+    left: 0;
+  }
+  .nav-links li {
+    margin: 15px 0;
+  }
+}
+
+/* 3. Touch-Friendly Elements */
+.btn, .btn-outline, .faq-question, .contact-social a, .social-links a {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 1em;
+}
+input, textarea, button {
+  min-height: 44px;
+  font-size: 1em;
+}
+
+/* 4. Text and Readability */
+.section-title h2 {
+  font-size: 2.5rem;
+}
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 480px) {
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+}
+/* Better contrast for nav links */
+.nav-links a {
+  color: #222 !important; /* Use a dark color for readability */
+}
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* 5. Images and Media */
+img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+#blogModalContent {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* 6. Performance and Accessibility */
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+[alt] {
+  outline: none;
+}
+:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
 
         /* Whatsapp Floating Button */
         .whatsapp-float {
@@ -175,7 +312,15 @@
         }
 
         .btn, .btn-outline {
-            transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+            min-width: 44px;
+            min-height: 44px;
+            font-size: 1em;
+            padding: 12px 30px; /* More horizontal padding for bigger buttons */
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            cursor: pointer;
         }
         .btn:hover, .btn-outline:hover {
             transform: scale(1.07) translateY(-3px) rotate(-1deg);
@@ -278,6 +423,72 @@
             border-radius: 20px;
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
         }
+
+        /* Dazzling Annimated */
+        .dazzle-text {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, #4361ee, #f72585, #3a0ca3, #4361ee 80%);
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: dazzle 2s linear infinite;
+            font-weight: 700;
+            letter-spacing: 1px;
+            filter: drop-shadow(0 2px 8px #f7258577);
+            z-index: 1;
+            overflow: visible;
+        }
+
+        /* Sparkle effect using pseudo-elements */
+        .dazzle-text::after {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: -10%;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #fff 60%, transparent 100%);
+            opacity: 0.7;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle-move 2.2s linear infinite;
+            z-index: 2;
+        }
+
+@keyframes dazzle {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes sparkle-move {
+  0% {
+    left: -10%;
+    opacity: 0.7;
+    top: 40%;
+    transform: scale(0.7) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.1) rotate(20deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.2) rotate(-20deg);
+  }
+  100% {
+    left: 110%;
+    opacity: 0;
+    top: 60%;
+    transform: scale(0.7) rotate(0deg);
+  }
+}
         
         /* About Section */
         .about-content {
@@ -414,6 +625,130 @@
             60% { transform: scale(1.25);}
             100% { transform: scale(1);}
         }
+
+        /* --- Mobile Modal Improvements --- */
+#blogModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+#blogModal[style*="display: flex"] {
+  display: flex !important;
+}
+#blogModal > div {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 90vw;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+@media (max-width: 600px) {
+  #blogModal > div {
+    padding: 15px;
+    max-width: 98vw;
+    border-radius: 10px;
+  }
+  #blogModalContent h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* --- Blog Cards --- */
+.blog-card {
+  min-width: 0;
+  word-break: break-word;
+}
+@media (max-width: 480px) {
+  .blog-card {
+    padding: 12px;
+    font-size: 0.97em;
+  }
+  .blog-card img {
+    height: 140px !important;
+    object-fit: cover;
+  }
+}
+
+/* --- Navigation Touch Targets --- */
+.nav-links a, .faq-question, .contact-social a, .social-links a {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 1em;
+  padding: 10px 0;
+}
+
+/* --- Hamburger Menu for Mobile --- */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    background: #fff;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: 1001;
+  }
+  .nav-links.active {
+    left: 0;
+  }
+  .nav-links li {
+    margin: 15px 0;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+/* --- Section Padding and Container --- */
+@media (max-width: 480px) {
+  section {
+    padding: 40px 0;
+  }
+  .container {
+    padding: 0 4px;
+  }
+}
+
+/* --- Responsive Images --- */
+img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Footer Responsive --- */
+@media (max-width: 600px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* --- FAQ Responsive --- */
+@media (max-width: 600px) {
+  .faq-list {
+    padding: 0 5px;
+  }
+  .faq-question {
+    font-size: 1rem;
+    padding: 12px;
+  }
+  .faq-answer {
+    font-size: 0.97rem;
+    padding: 0 12px 12px 12px;
+  }
+}
         
         /* Portfolio Section */
         .portfolio-filters {
@@ -652,31 +987,31 @@
         }
 
         /* Testimonials Section */
-.testimonials {
-    background: #f8f9fa;
-    padding: 80px 0;
-}
-.testimonials .section-title h2 {
-    color: var(--secondary);
-}
-.testimonials-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-}
-.testimonial-item {
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(67,97,238,0.07);
-    padding: 30px;
-    max-width: 350px;
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+        .testimonials {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        .testimonials .section-title h2 {
+            color: var(--secondary);
+        }
+        .testimonials-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .testimonial-item {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(67,97,238,0.07);
+            padding: 30px;
+            max-width: 350px;
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 .testimonial-item:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 10px 25px rgba(67,97,238,0.12);
@@ -934,6 +1269,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -951,7 +1287,10 @@
                 <div class="hero-text">
                         <!-- Place this where you want the typing animation -->
                         <span id="typing-text"></span>
-                    <h1>Creative Web & Graphic <span>Designer</span></h1>
+
+                    <h1>
+                        <span class="dazzle-text">Creative Web & Graphic Designer</span>
+                    </h1>
                     <p>I create beautiful, functional designs that help businesses stand out. With a passion for both web and graphic design, I bring ideas to life with creativity and technical expertise.</p>
                     <div class="hero-btns">
                         <a href="#portfolio" class="btn">View My Work</a>
@@ -987,6 +1326,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Skills Section -->
     <section id="skills" class="skills" data-aos="fade-up" data-aos-delay="200">
@@ -1167,6 +1507,78 @@
     </div>
   </div>
 </div>
+
+    <!-- Services -->
+     <section id="services" class="services" data-aos="fade-up" data-aos-delay="200">
+        <body style="background:#f8f9fa;color:#222;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;">
+  <div class="container" style="max-width:900px;margin:0 auto;padding:40px 16px;">
+    <div class="section-title" style="text-align:center;margin-bottom:40px;">
+      <h2 style="font-size:2.3rem;color:#3a0ca3;margin-bottom:10px;">Services & Pricing</h2>
+      <p style="color:#6c757d;font-size:1.1rem;">
+        Explore my creative services and transparent price ranges. For custom packages,
+        <a href="https://wa.me/+2347034727964" target="_blank" title="WhatsApp" style="color:#4361ee;text-decoration:none; cursor: pointer;"><i class="fab fa-whatsapp"></i></a>
+      </p>
+    </div>
+    <div class="services-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;">
+      <div class="service-card" style="background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(67,97,238,0.07);padding:30px 24px;text-align:center;transition:transform 0.18s,box-shadow 0.18s;border:1.5px solid #e9ecef;">
+        <i class="fas fa-laptop-code" style="font-size:2.2rem;color:#f72585;margin-bottom:18px;"></i>
+        <h3 style="color:#3a0ca3;margin-bottom:10px;font-size:1.2rem;">Website Design</h3>
+        <span class="price-range" style="font-size:1.1rem;font-weight:600;color:#4361ee;margin-bottom:10px;display:block;">₦80,000 – ₦2,500,000</span>
+        <p style="color:#6c757d;font-size:1rem;margin-bottom:18px;min-height:48px;">
+          Modern, responsive websites for businesses, portfolios, and brands. Includes up to 5 pages, contact form, and mobile optimization.
+        </p>
+        <a href="services.html" class="btn" style="display:inline-block;padding:10px 28px;background:#4361ee;color:#fff;border-radius:25px;font-weight:600;text-decoration:none;border:none;transition:background 0.2s,transform 0.2s;font-size:1em;margin-top:10px;">View More</a>
+      </div>
+      <div class="service-card" style="background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(67,97,238,0.07);padding:30px 24px;text-align:center;transition:transform 0.18s,box-shadow 0.18s;border:1.5px solid #e9ecef;">
+        <i class="fas fa-paint-brush" style="font-size:2.2rem;color:#f72585;margin-bottom:18px;"></i>
+        <h3 style="color:#3a0ca3;margin-bottom:10px;font-size:1.2rem;">Graphic Design</h3>
+        <span class="price-range" style="font-size:1.1rem;font-weight:600;color:#4361ee;margin-bottom:10px;display:block;">₦20,000 – ₦100,000</span>
+        <p style="color:#6c757d;font-size:1rem;margin-bottom:18px;min-height:48px;">
+          Logos, flyers, banners, social media graphics, and more. High-quality visuals tailored to your brand.
+        </p>
+        <a href="services.html" class="btn" style="display:inline-block;padding:10px 28px;background:#4361ee;color:#fff;border-radius:25px;font-weight:600;text-decoration:none;border:none;transition:background 0.2s,transform 0.2s;font-size:1em;margin-top:10px;">View More</a>
+      </div>
+      <div class="service-card" style="background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(67,97,238,0.07);padding:30px 24px;text-align:center;transition:transform 0.18s,box-shadow 0.18s;border:1.5px solid #e9ecef;">
+        <i class="fas fa-bullhorn" style="font-size:2.2rem;color:#f72585;margin-bottom:18px;"></i>
+        <h3 style="color:#3a0ca3;margin-bottom:10px;font-size:1.2rem;">Brand Identity</h3>
+        <span class="price-range" style="font-size:1.1rem;font-weight:600;color:#4361ee;margin-bottom:10px;display:block;">₦60,000 – ₦500,000</span>
+        <p style="color:#6c757d;font-size:1rem;margin-bottom:18px;min-height:48px;">
+          Complete branding packages: logo, color palette, typography, business cards, and brand guidelines.
+        </p>
+        <a href="services.html" class="btn" style="display:inline-block;padding:10px 28px;background:#4361ee;color:#fff;border-radius:25px;font-weight:600;text-decoration:none;border:none;transition:background 0.2s,transform 0.2s;font-size:1em;margin-top:10px;">View More</a>
+      </div>
+      <div class="service-card" style="background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(67,97,238,0.07);padding:30px 24px;text-align:center;transition:transform 0.18s,box-shadow 0.18s;border:1.5px solid #e9ecef;">
+        <i class="fas fa-mobile-alt" style="font-size:2.2rem;color:#f72585;margin-bottom:18px;"></i>
+        <h3 style="color:#3a0ca3;margin-bottom:10px;font-size:1.2rem;">UI/UX Design</h3>
+        <span class="price-range" style="font-size:1.1rem;font-weight:600;color:#4361ee;margin-bottom:10px;display:block;">₦50,000 – ₦200,000</span>
+        <p style="color:#6c757d;font-size:1rem;margin-bottom:18px;min-height:48px;">
+          Wireframes, prototypes, and user interface design for web and mobile apps. Focused on usability and aesthetics.
+        </p>
+        <a href="services.html" class="btn" style="display:inline-block;padding:10px 28px;background:#4361ee;color:#fff;border-radius:25px;font-weight:600;text-decoration:none;border:none;transition:background 0.2s,transform 0.2s;font-size:1em;margin-top:10px;">View More</a>
+      </div>
+      <div class="service-card" style="background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(67,97,238,0.07);padding:30px 24px;text-align:center;transition:transform 0.18s,box-shadow 0.18s;border:1.5px solid #e9ecef;">
+        <i class="fas fa-print" style="font-size:2.2rem;color:#f72585;margin-bottom:18px;"></i>
+        <h3 style="color:#3a0ca3;margin-bottom:10px;font-size:1.2rem;">Hosting & Domain</h3>
+        <span class="price-range" style="font-size:1.1rem;font-weight:600;color:#4361ee;margin-bottom:10px;display:block;">₦20,000 – ₦1,500,000</span>
+        <p style="color:#6c757d;font-size:1rem;margin-bottom:18px;min-height:48px;">
+           Reliable web hosting and domain name registration for individuals and businesses, ensuring fast performance and 24/7 uptime.
+        </p>
+        <a href="services.html" class="btn" style="display:inline-block;padding:10px 28px;background:#4361ee;color:#fff;border-radius:25px;font-weight:600;text-decoration:none;border:none;transition:background 0.2s,transform 0.2s;font-size:1em;margin-top:10px;">View More</a>
+      </div>
+      <div class="service-card" style="background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(67,97,238,0.07);padding:30px 24px;text-align:center;transition:transform 0.18s,box-shadow 0.18s;border:1.5px solid #e9ecef;">
+        <i class="fas fa-cogs" style="font-size:2.2rem;color:#f72585;margin-bottom:18px;"></i>
+        <h3 style="color:#3a0ca3;margin-bottom:10px;font-size:1.2rem;">Custom Projects</h3>
+        <span class="price-range" style="font-size:1.1rem;font-weight:600;color:#4361ee;margin-bottom:10px;display:block;">Contact for Quote</span>
+        <p style="color:#6c757d;font-size:1rem;margin-bottom:18px;min-height:48px;">
+          Have a unique idea? Let’s discuss your custom project and bring it to life!
+        </p>
+        <a href="https://wa.me/+2347034727964" class="btn" style="display:inline-block;padding:10px 28px;background:#4361ee;color:#fff;border-radius:25px;font-weight:600;text-decoration:none;border:none;transition:background 0.2s,transform 0.2s;font-size:1em;margin-top:10px;">Contact Me</a>
+      </div>
+    </div>
+  </div>
+
+     </section>
+    
 
     <!-- Replace your current stats section with this advanced, lively version -->
 
@@ -1568,7 +1980,19 @@
         </div>
     </footer>
 
-   
+
+
+   <!-- Blog Modal Popup -->
+<div id="blogModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:99999;">
+  <div style="background:#fff;padding:30px;border-radius:15px;max-width:600px;width:90%;position:relative;">
+    <button onclick="document.getElementById('blogModal').style.display='none'" style="position:absolute;top:10px;right:15px;font-size:1.5em;background:none;border:none;cursor:pointer;">&times;</button>
+    <div id="blogModalContent"></div>
+  </div>
+</div>
+
+<!--Custom Cursor-->
+<div id="custom-cursor"></div>
+
     
     <!-- Place EmailJS SDK BEFORE your custom script -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -1578,7 +2002,7 @@
 
     // Typing Animation
 document.addEventListener("DOMContentLoaded", function() {
-    const yourText = "Welcome To Ridwan Portfolio Website!";
+    const yourText = "Welcome To Ridwan Portfolio!";
     const typingElement = document.getElementById("typing-text");
     let charIndex = 0;
     function typeText() {
@@ -1834,22 +2258,49 @@ document.querySelectorAll('.blog-read-more').forEach((btn, idx) => {
   });
 });
 // ...existing code...
+
+// Custom Cursor Follower with Grow on Hover and Shrink on Click
+document.addEventListener('DOMContentLoaded', function() {
+  // ...your custom cursor code here...
+
+  const cursor = document.getElementById('custom-cursor');
+
+// Move cursor
+document.addEventListener('mousemove', function(e) {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+// Grow on hover
+const hoverTargets = 'a, button, .btn, .btn-outline, input[type="submit"], input[type="button"]';
+document.querySelectorAll(hoverTargets).forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+});
+
+// Shrink on click
+document.addEventListener('mousedown', () => {
+  cursor.classList.add('shrink');
+});
+document.addEventListener('mouseup', () => {
+  cursor.classList.remove('shrink');
+});
+
+// Optional: Hide cursor on touch devices
+if ('ontouchstart' in window) {
+  cursor.style.display = 'none';
+}
+});
+
 // ...existing code...
 
 </script>
 <!-- ...existing code below... -->
-
+<!--HTML CODE BUTTON-->
 <a href="https://wa.me/2347034727964" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- Blog Modal Popup -->
-<div id="blogModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;z-index:99999;">
-  <div style="background:#fff;padding:30px;border-radius:15px;max-width:600px;width:90%;position:relative;">
-    <button onclick="document.getElementById('blogModal').style.display='none'" style="position:absolute;top:10px;right:15px;font-size:1.5em;background:none;border:none;cursor:pointer;">&times;</button>
-    <div id="blogModalContent"></div>
-  </div>
-</div>
 
 </body>
 </html>
