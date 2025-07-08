@@ -17,6 +17,28 @@
 
     <style>
 
+        /* Parallax effect for hero image */
+        .hero-image {
+            perspective: 900px;
+            will-change: transform;
+        }
+        .hero-image img {
+            transition: transform 0.5s cubic-bezier(.4,2,.6,1);
+        }
+        .hero-image:hover img {
+            transform: scale(1.04) rotateY(8deg) rotateX(4deg);
+            box-shadow: 0 12px 32px rgba(67,97,238,0.18);
+        }
+        .about-image img {
+            transition: transform 0.5s cubic-bezier(.4,2,.6,1);
+        }
+        .about-image:hover img {
+            transform: scale(1.04) rotateY(-8deg) rotateX(-4deg);
+            box-shadow: 0 12px 32px rgba(67,97,238,0.18);
+        }
+
+
+
         /* Custom Cursor */
         #custom-cursor {
             position: fixed;
@@ -44,6 +66,20 @@
             border-width: 1px;
         }
 
+        .shimmer-text {
+  background: linear-gradient(90deg, #4361ee, #f72585, #3a0ca3, #4361ee 80%);
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s linear infinite;
+}
+@keyframes shimmer {
+  0% {background-position: 0% 50%;}
+  100% {background-position: 200% 50%;}
+}
+
         /* 1. Responsive Layout */
 @media (max-width: 992px) {
   .hero-content, .about-content {
@@ -63,6 +99,14 @@
   .container {
     padding: 0 8px;
   }
+}
+
+.social-links a:hover {
+  animation: spin 0.6s;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* 2. Navigation (Hamburger menu for mobile) */
@@ -181,7 +225,7 @@ img {
         #typing-text {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--secondary);
+            color: white; /* Change this line to white */
             white-space: nowrap;
             border-right: 2px solid var(--accent);
             animation: blink-caret 0.7s step-end infinite;
@@ -326,7 +370,17 @@ img {
             transform: scale(1.07) translateY(-3px) rotate(-1deg);
             box-shadow: 0 8px 24px rgba(67,97,238,0.13);
         }
-        
+
+        .btn, .btn-outline {
+            box-shadow: 0 0 0 transparent;
+        }
+        .btn:hover, .btn-outline:hover {
+            box-shadow: 0 0 18px 2px #f72585, 0 0 32px 4px #4361ee;
+            background: linear-gradient(90deg, #4361ee, #f72585);
+            color: #fff;
+            transform: translateY(-3px) scale(1.05) rotate(-1deg);
+        }
+
         /* Header & Navigation */
         header {
             background-color: white;
@@ -423,6 +477,17 @@ img {
             border-radius: 20px;
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
         }
+
+        .hero {
+  background: linear-gradient(270deg, #4361ee, #f72585, #3a0ca3, #4361ee);
+  background-size: 800% 800%;
+  animation: gradientBG 12s ease infinite;
+}
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
 
         /* Dazzling Annimated */
         .dazzle-text {
@@ -1172,6 +1237,14 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
                 width: 100%;
             }
         }
+        @keyframes bounce {
+            0% { transform: scale(1);}
+            60% { transform: scale(1.25);}
+            100% { transform: scale(1);}
+        }
+        .stat-card .counted {
+            animation: pop 0.4s;
+        }
         
         @media (max-width: 768px) {
             .hamburger {
@@ -1255,6 +1328,8 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
     </style>
 </head>
 <body>
+    <!-- Particle Background -->
+<div id="particles-js" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></div>
     <!-- Header & Navigation -->
     <header data-aos="fade-down" data-aos-delay="200">
         <div class="container">
@@ -1291,24 +1366,26 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
                     <h1>
                         <span class="dazzle-text">Creative Web & Graphic Designer</span>
                     </h1>
-                    <p>I create beautiful, functional designs that help businesses stand out. With a passion for both web and graphic design, I bring ideas to life with creativity and technical expertise.</p>
+                    <p style="color: white;">I create beautiful, functional designs that help businesses stand out. With a passion for both web and graphic design, I bring ideas to life with creativity and technical expertise.</p>
                     <div class="hero-btns">
                         <a href="#portfolio" class="btn">View My Work</a>
                         <a href="#contact" class="btn btn-outline">Contact Me</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://i.pinimg.com/736x/b4/07/3a/b4073ae822c46bc169e18a42f49bba08.jpg" alt="Designer at work">
+                    <img src="https://i.pinimg.com/736x/b4/07/3a/b4073ae822c46bc169e18a42f49bba08.jpg" alt="Designer at work" >
                 </div>
             </div>
         </div>
     </section>
 
+    
+
     <!-- About Section -->
     <section id="about" class="about" data-aos="fade-up" data-aos-delay="200" >
         <div class="container">
             <div class="section-title">
-                <h2>About Me</h2>
+                <h2 class="shimmer-text">About Me</h2>
                 <p>Get to know the designer behind the work</p>
             </div>
             <div class="about-content">
@@ -1332,7 +1409,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
     <section id="skills" class="skills" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="section-title">
-                <h2>My Skills</h2>
+                <h2 class="shimmer-text">My Skills</h2>
                 <p>Combining creative design with technical expertise</p>
             </div>
             <div class="skills-container">
@@ -1463,7 +1540,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
 
 <div class="container" data-aos="fade-up" data-aos-delay="200">
   <div class="section-title">
-    <h2>Tech Stack</h2>
+    <h2 class="shimmer-text">Tech Stack</h2>
     <p>Languages, frameworks, and tools I use</p>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:60px;justify-content:center;">
@@ -1513,7 +1590,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
         <body style="background:#f8f9fa;color:#222;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;">
   <div class="container" style="max-width:900px;margin:0 auto;padding:40px 16px;">
     <div class="section-title" style="text-align:center;margin-bottom:40px;">
-      <h2 style="font-size:2.3rem;color:#3a0ca3;margin-bottom:10px;">Services & Pricing</h2>
+      <h2 class="shimmer-text" style="font-size:2.3rem;color:#3a0ca3;margin-bottom:10px;">Services & Pricing</h2>
       <p style="color:#6c757d;font-size:1.1rem;">
         Explore my creative services and transparent price ranges. For custom packages,
         <a href="https://wa.me/+2347034727964" target="_blank" title="WhatsApp" style="color:#4361ee;text-decoration:none; cursor: pointer;"><i class="fab fa-whatsapp"></i></a>
@@ -1585,7 +1662,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
 <section id="stats" class="stats-section" data-aos="fade-up" data-aos-delay="200">
   <div class="container">
     <div class="section-title">
-      <h2>My Impact in Numbers</h2>
+      <h2 class="shimmer-text">My Impact in Numbers</h2>
       <p>Here’s a quick look at my achievements and experience so far</p>
     </div>
     <div class="stats-advanced" style="display:flex;gap:40px;justify-content:center;flex-wrap:wrap;">
@@ -1621,7 +1698,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
     <section id="portfolio" class="portfolio" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="section-title">
-                <h2>My Portfolio</h2>
+                <h2 class="shimmer-text">My Portfolio</h2>
                 <p>Explore my recent design projects</p>
             </div>
             
@@ -1678,7 +1755,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
 <section id="blog" class="blog" data-aos="fade-up" data-aos-delay="200">
     <div class="container">
         <div class="section-title">
-            <h2>Blog & Insights</h2>
+            <h2 class="shimmer-text">Blog & Insights</h2>
             <p>Read my latest articles on programming, design, and my creative journey</p>
         </div>
         <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
@@ -1711,7 +1788,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
    <section id="faq" class="faq" data-aos="fade-up" data-aos-delay="200">
     <div class="container">
         <div class="section-title">
-            <h2>Frequently Asked Questions</h2>
+            <h2 class="shimmer-text">Frequently Asked Questions</h2>
             <p>Find answers to common questions about my services and process</p>
         </div>
         <div class="faq-list">
@@ -1784,7 +1861,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-title">
-                <h2>Contact Me</h2>
+                <h2 class="shimmer-text">Contact Me</h2>
                 <p>Let's work together on your next project</p>
             </div>
             <div class="contact-container">
@@ -1861,7 +1938,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
 <section id="testimonials" class="testimonials" data-aos="200">
     <div class="container">
         <div class="section-title" data-aos="fade-down">
-            <h2>Testimonials</h2>
+            <h2 class="shimmer-text">Testimonials</h2>
             <p>What clients and colleagues say about my work</p>
         </div>
         <div class="testimonials-list" style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
@@ -1924,7 +2001,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
     <section class="map" data-aos="fade-up" data-aos-delay="200">
         <div class="container">
             <div class="section-title">
-                <h2>Find Me Here</h2>
+                <h2 class="shimmer-text">Find Me Here</h2>
                 <p>Visit my location or get in touch online</p>
             </div>
         <div class="embed-map-responsive"><div class="embed-map-container"><iframe class="embed-map-frame" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&height=400&hl=en&q=Ayobo%20Lagos%20State&t=&z=14&ie=UTF8&iwloc=B&output=embed"></iframe><a href="https://sprunkiretake.net" style="font-size:2px!important;color:gray!important;position:absolute;bottom:0;left:0;z-index:1;max-height:1px;overflow:hidden">sprunki retake</a></div><style>.embed-map-responsive{position:relative;text-align:right;width:100%;height:0;padding-bottom:66.66666666666666%;}.embed-map-container{overflow:hidden;background:none!important;width:100%;height:100%;position:absolute;top:0;left:0;}.embed-map-frame{width:100%!important;height:100%!important;position:absolute;top:0;left:0;}</style></div>
@@ -1975,7 +2052,7 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Ridwan Portfolio. All rights reserved.</p>
+                <p class="shimmer-text">&copy; 2025 Ridwan Portfolio. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1998,7 +2075,34 @@ img, .hero-image img, .about-image img, .portfolio-item img, .testimonial-item i
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+
+    // particles.js Configuration
+    
+particlesJS('particles-js', {
+  particles: {
+    number: { value: 40, density: { enable: true, value_area: 800 } },
+    color: { value: ["#4361ee", "#f72585", "#3a0ca3"] },
+    shape: { type: "circle" },
+    opacity: { value: 0.3, random: true },
+    size: { value: 10, random: true },
+    line_linked: { enable: true, distance: 120, color: "#4361ee", opacity: 0.2, width: 1 },
+    move: { enable: true, speed: 1.2, direction: "none", random: false, straight: false, out_mode: "out" }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: false }
+    },
+    modes: {
+      repulse: { distance: 80, duration: 0.3 }
+    }
+  },
+  retina_detect: true
+});
+
 
     // Typing Animation
 document.addEventListener("DOMContentLoaded", function() {
@@ -2019,6 +2123,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     typeText();
 });
+
 // ...Testimonial Page...
     // Initialize AOS (Animate On Scroll)
     AOS.init({
